@@ -91,29 +91,58 @@ const products = [
 
 //Ref
 const shopContainer = document.querySelector('.shop-container');
+const descriptionProduct = document.querySelector('.description-products');
+const wishCounter = document.getElementById('wish-caunter');
+const cartCounter = document.getElementById('cart-caunter');
 
-products.forEach( (product) => {
-    shopContainer.innerHTML += `
-    <div class="shop-card">
-              <div class="card-image">
-                <img
-                  src="${product.url}"
-                  alt="${product.title}"
-                />
-              </div>
-              <div class="card-text">
-                <h3>${product.title}</h3>
-                <p>${product.category}</p>
-              </div>
-            </div>`;
-});
+products.forEach( (product, i) => {
+    const productCard = document.createElement('div');
+    productCard.classList.add('shop-card');
+    shopContainer.append(productCard);
 
-//* 2.
-const productCards = document.querySelectorAll('.shop-card');
-console.log(productCards);
+    productCard.innerHTML += `
+    <div class="shop-card card-${i}">
+        <div class="card-image">
+        <img
+            src="${product.url}"
+            alt="${product.title}"
+        />
+        </div>
+        <div class="card-text">
+            <h3>${product.title}</h3>
+            <p>${product.category}</p>
+        </div>
+    </div>`;
 
-productCards.forEach( (card) => {
-    card.addEventListener( 'click', () =>{
+    //* 2.
+    productCard.addEventListener( 'click', () =>{
+
+        descriptionProduct.innerHTML = `
+            <h3 class="product-title">${product.title}</h3>
+            <span class="product-category">${product.category}</span>
+            <p class="product-description">${product.description}</p>
+            <span class="product-price">${product.price}</span>`;
+
+            const whishListBtn = document.createElement('button');
+            whishListBtn.classList.add('whish-list');
+            whishListBtn.append('Cuore');
+            descriptionProduct.append(whishListBtn);
+        
+            const cartBtn = document.createElement('button');
+            cartBtn.classList.add('add-chart');
+            cartBtn.append('Aggiungi al carrello');
+            descriptionProduct.append(cartBtn);
+    });
+
+    //* 3.
+    whishListBtn.addEventListener('click', () => {
         
     });
+
+    cartBtn.addEventListener('click', () => {
+
+    });
+
 });
+
+
